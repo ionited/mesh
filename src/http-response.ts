@@ -1,13 +1,21 @@
 import { readFile } from 'fs/promises';
-import { HttpResponse as UHttpResponse } from 'uWebSockets.js';
 import { getMime } from './mime';
 
 export class HttpResponse {
-  private res: UHttpResponse;
-  
-  constructor(res: UHttpResponse) {
-    this.res = res;
-  }
+  /**
+   * Response body
+   */
+  body = '';
+
+  /**
+   * Response headers
+   */
+  headers: { [key: string]: string } = {};
+
+  /**
+   * Response status
+   */
+  statusCode: number | undefined;
 
   /**
    * Sets response headers
@@ -24,7 +32,7 @@ export class HttpResponse {
    * ```
    */
   header(key: string, value: string) {
-    this.res.writeHeader(key, value);
+    this.headers[key] = value;
 
     return this;
   }
@@ -54,7 +62,7 @@ export class HttpResponse {
    * ```
    */
   send(text: string) {
-    this.res.end(text);
+    this.body = text;
   }
 
   /**
@@ -91,7 +99,7 @@ export class HttpResponse {
    * ```
    */
   status(status: number) {
-    this.res.writeStatus(status.toString());
+    this.statusCode = status;
 
     return this;
   }

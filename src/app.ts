@@ -139,6 +139,7 @@ export class App {
    * Registers routes
    * 
    * @param routes
+   * @returns App instance
    * 
    * @example
    * ```
@@ -232,23 +233,31 @@ export class App {
   ) {
     const middlewares = this.middlewares.filter(m => !m.pattern || pattern.startsWith(m.pattern));
 
+    let aborted = false;
+
     this.app[method](pattern, async (ures, ureq) => {
       const
         req = new HttpRequest(ureq, pattern),
-        res = new HttpResponse(ures);
+        res = new HttpResponse();
         
-      ures.onAborted(() => { });
+      ures.onAborted(() => aborted = true);
 
       req.body = this.parseBody(await this.getBody(ures), req.headers['content-type']);
 
-      ures.cork(async () => {
-        try {
-          for (const m of middlewares) await m.middleware(req, res);
+      try {
+        for (const m of middlewares) await m.middleware(req, res);
 
-          await handler(req, res);
-        } catch(e) {
-          if (this.catchFunction) this.catchFunction(e, req, res);
-        }
+        await handler(req, res);
+      } catch(e) {
+        if (this.catchFunction) this.catchFunction(e, req, res);
+      }
+
+      if (!aborted) ures.cork(() => {
+        if (res.statusCode) ures.writeStatus(res.statusCode.toString());
+
+        for (const h in res.headers) ures.writeHeader(h, res.headers[h]);
+
+        ures.end(res.body);
       });
     });
   }
