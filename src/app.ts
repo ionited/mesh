@@ -156,6 +156,8 @@ export class App {
       if (r.method === 'use') this.use(r.pattern as string, r.handler);
       else this.register(r.method, r.pattern as string, r.handler);
     }
+
+    return this;
   }
 
   /**
