@@ -27,12 +27,18 @@ export class HttpRequest {
    */
   query: { [key: string]: string } = {};
 
+  /**
+   * Request URL including initial /slash
+   */
+  url: string;
+
   private pattern: string;
   private req: UHttpRequest;
 
   constructor(req: UHttpRequest, pattern: string) {
     this.req = req;
     this.pattern = pattern;
+    this.url = req.getUrl();
 
     this.getHeaders();
     this.getParams();

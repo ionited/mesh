@@ -65,6 +65,7 @@ interface HttpRequest {
   headers: { [key: string]: string };
   params: { [key: string]: string };
   query: { [key: string]: string };
+  url: string;
 }
 ```
 
