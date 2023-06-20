@@ -2,7 +2,7 @@
   "name": "@ionited/fiber",
   "version": "0.1.1",
   "description": "A fast web framework based on uWebSocket.js",
-  "main": "./dist/fiber.ts",
+  "main": "./dist/fiber.js",
   "scripts": {
     "build": "tsc"
   },
