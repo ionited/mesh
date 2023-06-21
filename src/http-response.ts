@@ -1,5 +1,6 @@
 import { readFile } from 'fs/promises';
 import { getMime } from './mime';
+import { STATUS_CODES } from 'http';
 
 export class HttpResponse {
   /**
@@ -15,7 +16,11 @@ export class HttpResponse {
   /**
    * Response status
    */
-  statusCode: number | undefined;
+  statusCode: string;
+
+  constructor() {
+    this.statusCode = this.getStatusCode(200);
+  }
 
   /**
    * Sets response headers
@@ -99,8 +104,12 @@ export class HttpResponse {
    * ```
    */
   status(status: number) {
-    this.statusCode = status;
+    this.statusCode = this.getStatusCode(status);
 
     return this;
+  }
+
+  private getStatusCode(status: number) {
+    return `${status} ${STATUS_CODES[status]}`;
   }
 }

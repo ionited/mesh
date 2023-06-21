@@ -96,6 +96,26 @@ export class App {
   }
 
   /**
+   * Handles `OPTIONS` requests
+   * 
+   * @param pattern path to match
+   * @param handler request handler function
+   * @returns App instance
+   * 
+   * @example
+   * ```ts
+   * const app = new App();
+   * 
+   * app.options((req, res) => res.json({ success: true }));
+   * ```
+   */
+  options(pattern: string, handler: (req: HttpRequest, res: HttpResponse) => void | Promise<void>) {
+    this.register('options', pattern, handler);
+
+    return this;
+  }
+
+  /**
    * Handles `POST` requests
    * 
    * @param pattern path to match
@@ -227,7 +247,7 @@ export class App {
   }
 
   private register(
-    method: 'del' |  'get' | 'post' | 'put',
+    method: 'del' |  'get' | 'options' | 'post' | 'put',
     pattern: string,
     handler: (req: HttpRequest, res: HttpResponse) => void | Promise<void>
   ) {
@@ -253,7 +273,7 @@ export class App {
       }
 
       if (!aborted) ures.cork(() => {
-        if (res.statusCode) ures.writeStatus(res.statusCode.toString());
+        ures.writeStatus(res.statusCode);
 
         for (const h in res.headers) ures.writeHeader(h, res.headers[h]);
 
