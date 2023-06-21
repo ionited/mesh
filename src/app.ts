@@ -96,6 +96,7 @@ export class App {
     .listen(port, cb ? cb : () => {})
     .options('/*', res => {
       res
+      .writeHeader('Access-Control-Allow-Headers', '*')
       .writeHeader('Access-Control-Allow-Origin', '*')
       .writeHeader('Access-Control-Allow-Methods', 'DELETE, GET, OPTIONS, POST, PUT')
       .endWithoutBody();
