@@ -92,15 +92,7 @@ export class App {
    * ```
    */
   listen(port: number, cb?: () => void | Promise<void>) {
-    this.app
-    .listen(port, cb ? cb : () => {})
-    .options('/*', res => {
-      res
-      .writeHeader('Access-Control-Allow-Headers', '*')
-      .writeHeader('Access-Control-Allow-Origin', '*')
-      .writeHeader('Access-Control-Allow-Methods', 'DELETE, GET, OPTIONS, POST, PUT')
-      .endWithoutBody();
-    });
+    this.app.listen(port, cb ? cb : () => {});
   }
 
   /**
