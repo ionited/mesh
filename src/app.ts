@@ -263,7 +263,7 @@ export class App {
 
     if (contentType === 'application/json') req.body = JSON.parse(body.toString());
     else if (contentType === 'application/x-www-form-urlencoded') req.body = parseQuery(body.toString());
-    else if (contentType.startsWith('multipart/form-data')) getParts(body, contentType)?.forEach(p => {
+    else if (contentType?.startsWith('multipart/form-data')) getParts(body, contentType)?.forEach(p => {
       if (p.type && p.filename) req.files[p.name] = { data: p.data, filename: p.filename, type: p.type };
       else req.body[p.name] = Buffer.from(p.data).toString();
     });
