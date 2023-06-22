@@ -1,6 +1,12 @@
 import { HttpRequest as UHttpRequest } from 'uWebSockets.js';
 import { parseQuery } from './utils';
 
+interface UploadedFile {
+  data: ArrayBuffer;
+  filename: string;
+  type: string;
+}
+
 export class HttpRequest {
   /**
    * Request body content
@@ -11,6 +17,11 @@ export class HttpRequest {
    * Request user defined data
    */
   data: { [key: string]: any } = {};
+
+  /**
+   * Request body content
+   */
+  files: { [key: string]: UploadedFile | undefined } = {};
 
   /**
    * Request headers

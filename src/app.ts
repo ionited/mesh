@@ -236,18 +236,18 @@ export class App {
     }));
   }
 
-  private parseBody(body: Buffer, contentType: string) {
-    if (!body) return {};
+  private parseBody(body: Buffer, req: HttpRequest) {
+    if (!body) return;
 
-    if (contentType === 'application/json') return JSON.parse(body.toString());
-    if (contentType === 'application/x-www-form-urlencoded') return parseQuery(body.toString());
-    if (contentType.startsWith('multipart/form-data')) return getParts(body, contentType)?.reduce((all, p) => {
-      all[p.name] = p;
+    const contentType = req.headers['content-type'];
 
-      return all;
-    }, {} as any);
-
-    return body;
+    if (contentType === 'application/json') req.body = JSON.parse(body.toString());
+    else if (contentType === 'application/x-www-form-urlencoded') req.body = parseQuery(body.toString());
+    else if (contentType.startsWith('multipart/form-data')) getParts(body, contentType)?.forEach(p => {
+      if (p.type && p.filename) req.files[p.name] = { data: p.data, filename: p.filename, type: p.type };
+      else req.body[p.name] = Buffer.from(p.data).toString();
+    });
+    else req.body = body;
   }
 
   private register(
@@ -266,7 +266,7 @@ export class App {
         
       ures.onAborted(() => aborted = true);
 
-      req.body = this.parseBody(await this.getBody(ures), req.headers['content-type']);
+      this.parseBody(await this.getBody(ures), req);
 
       try {
         for (const m of middlewares) await m.middleware(req, res);

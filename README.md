@@ -62,6 +62,7 @@ const routes = router.routes();
 interface HttpRequest {
   body: { [key: string]: any };
   data: { [key: string]: any };
+  files: { [key: string]: UploadedFile | undefined } = {};
   headers: { [key: string]: string };
   params: { [key: string]: string };
   query: { [key: string]: string };
