@@ -261,9 +261,13 @@ export class App {
 
     const contentType = req.headers['content-type'];
 
-    if (contentType === 'application/json') req.body = JSON.parse(body.toString());
-    else if (contentType === 'application/x-www-form-urlencoded') req.body = parseQuery(body.toString());
-    else if (contentType?.startsWith('multipart/form-data')) getParts(body, contentType)?.forEach(p => {
+    if (contentType === 'application/json' || contentType === 'application/x-www-form-urlencoded') {
+      const bodyStr = body.toString();
+      
+      if (!bodyStr) return;
+
+      req.body = contentType === 'application/json' ? JSON.parse(body.toString()) : parseQuery(body.toString());
+    } else if (contentType?.startsWith('multipart/form-data')) getParts(body, contentType)?.forEach(p => {
       if (p.type && p.filename) req.files[p.name] = { data: p.data, filename: p.filename, type: p.type };
       else req.body[p.name] = Buffer.from(p.data).toString();
     });
