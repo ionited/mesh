@@ -2,7 +2,7 @@ import { HttpResponse } from './http-response';
 import { HttpRequest } from './http-request';
 
 export interface Route {
-  method: 'del' |  'get' | 'post' | 'put' | 'use';
+  method: 'any' | 'del' |  'get' | 'options' | 'post' | 'put' | 'use';
   pattern?: string;
   handler: (req: HttpRequest, res: HttpResponse) => void | Promise<void>;
 }
@@ -23,6 +23,26 @@ export class Router {
    */
   constructor(prefix?: string) {
     this.prefix = prefix ?? '';
+  }
+  
+  /**
+   * Registers `ANY` route
+   * 
+   * @param pattern path to match
+   * @param handler request handler function
+   * @returns Router instance
+   * 
+   * @example
+   * ```ts
+   * const router = new Router();
+   * 
+   * router.any((req, res) => res.json({ success: true }));
+   * ```
+   */
+  any(pattern: string, handler: (req: HttpRequest, res: HttpResponse) => void | Promise<void>) {
+    this.data.push({ method: 'any', pattern: this.prefix + pattern, handler });
+
+    return this;
   }
   
   /**
@@ -61,6 +81,26 @@ export class Router {
    */
   get(pattern: string, handler: (req: HttpRequest, res: HttpResponse) => void | Promise<void>) {
     this.data.push({ method: 'get', pattern: this.prefix + pattern, handler });
+
+    return this;
+  }
+
+  /**
+   * Registers `OPTIONS` route
+   * 
+   * @param pattern path to match
+   * @param handler request handler function
+   * @returns Router instance
+   * 
+   * @example
+   * ```ts
+   * const router = new Router();
+   * 
+   * router.options((req, res) => res.json({ success: true }));
+   * ```
+   */
+  options(pattern: string, handler: (req: HttpRequest, res: HttpResponse) => void | Promise<void>) {
+    this.data.push({ method: 'options', pattern: this.prefix + pattern, handler });
 
     return this;
   }

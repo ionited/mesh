@@ -25,9 +25,13 @@ app
 
 .catch((e, req, res) => res.status(e.status ?? 500).json({ message: e.message ?? 'Internal server error' }))
 
+.any('/user', (req, res) => res.json({ success: true }))
+
 .del('/user', (req, res) => res.json({ success: true }))
 
 .get('/user', (req, res) => res.json({ success: true }))
+
+.options('/user', (req, res) => res.json({ success: true }))
 
 .post('/user', (req, res) => res.json({ success: true }))
 
@@ -45,9 +49,13 @@ router
 
 .use((req, res) => console.log('Hello World!'))
 
+.any('/users', (req, res) => res.json({ success: true }))
+
 .del('/users', (req, res) => res.json({ success: true }))
 
 .get('/users', (req, res) => res.json({ success: true }))
+
+.options('/users', (req, res) => res.json({ success: true }))
 
 .post('/users', (req, res) => res.json({ success: true }))
 
@@ -56,7 +64,7 @@ router
 const routes = router.routes();
 ```
 
-# HttpRequest
+### HttpRequest
 
 ```ts
 interface HttpRequest {
@@ -70,7 +78,7 @@ interface HttpRequest {
 }
 ```
 
-# HttpResponse
+### HttpResponse
 
 ```ts
 interface HttpResponse {
@@ -79,6 +87,16 @@ interface HttpResponse {
   send(text: string): void;
   sendFile(path: string): Promise<void>;
   status(status: number): this;
+}
+```
+
+### UploadedFile
+
+```ts
+interface UploadedFile {
+  data: ArrayBuffer;
+  filename: string;
+  type: string;
 }
 ```
 

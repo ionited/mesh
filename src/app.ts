@@ -20,6 +20,26 @@ export class App {
   }
 
   /**
+   * Handles `ANY` requests
+   * 
+   * @param pattern path to match
+   * @param handler request handler function
+   * @returns App instance
+   * 
+   * @example
+   * ```ts
+   * const app = new App();
+   * 
+   * app.any((req, res) => res.json({ success: true }));
+   * ```
+   */
+  any(pattern: string, handler: (req: HttpRequest, res: HttpResponse) => void | Promise<void>) {
+    this.register('any', pattern, handler);
+
+    return this;
+  }
+
+  /**
    * Catches app errors
    * 
    * @param handler error handler function
@@ -251,7 +271,7 @@ export class App {
   }
 
   private register(
-    method: 'del' |  'get' | 'options' | 'post' | 'put',
+    method: 'any' | 'del' |  'get' | 'options' | 'post' | 'put',
     pattern: string,
     handler: (req: HttpRequest, res: HttpResponse) => void | Promise<void>
   ) {
