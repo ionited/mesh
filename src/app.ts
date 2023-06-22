@@ -1,7 +1,7 @@
-import { App as uWebSockets, HttpResponse as UHttpResponse, TemplatedApp } from 'uWebSockets.js';
+import { App as uWebSockets, HttpResponse as UHttpResponse, TemplatedApp, getParts } from 'uWebSockets.js';
 import { HttpResponse } from './http-response';
 import { HttpRequest } from './http-request';
-import { getParts, parseQuery } from './utils';
+import { parseQuery } from './utils';
 import { Route } from './router';
 
 export class App {
@@ -220,15 +220,15 @@ export class App {
     return this;
   }
 
-  private async getBody(res: UHttpResponse): Promise<any> {
+  private async getBody(res: UHttpResponse): Promise<Buffer> {
     let buffer: Buffer;
 
     return new Promise(resolve => res.onData((ab, isLast) => {
       const chunk = Buffer.from(ab);
 
       if (isLast) {
-        if (buffer) resolve(Buffer.concat([buffer, chunk]).toString());
-        else resolve(chunk.toString());
+        if (buffer) resolve(Buffer.concat([buffer, chunk]));
+        else resolve(chunk);
       } else {
         if (buffer) buffer = Buffer.concat([buffer, chunk]);
         else buffer = Buffer.concat([chunk]);
@@ -236,12 +236,16 @@ export class App {
     }));
   }
 
-  private parseBody(body: string, contentType: string) {
+  private parseBody(body: Buffer, contentType: string) {
     if (!body) return {};
 
-    if (contentType === 'application/json') return JSON.parse(body);
-    if (contentType === 'application/x-www-form-urlencoded') return parseQuery(body);
-    if (contentType.startsWith('multipart/form-data')) return getParts(body, contentType);
+    if (contentType === 'application/json') return JSON.parse(body.toString());
+    if (contentType === 'application/x-www-form-urlencoded') return parseQuery(body.toString());
+    if (contentType.startsWith('multipart/form-data')) return getParts(body, contentType)?.reduce((all, p) => {
+      all[p.name] = p;
+
+      return all;
+    }, {} as any);
 
     return body;
   }
