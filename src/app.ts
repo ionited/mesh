@@ -112,6 +112,10 @@ export class App {
    * ```
    */
   listen(port: number, cb?: () => void | Promise<void>) {
+    this.app.any('/*', res => {
+      res.cork(() => res.writeStatus('404 Not Found').end());
+    });
+
     this.app.listen(port, cb ? cb : () => {});
   }
 
