@@ -1,7 +1,7 @@
 import { HttpRequest as UHttpRequest } from 'uWebSockets.js';
 import { parseQuery } from './utils';
 
-interface UploadedFile {
+export interface UploadedFile {
   data: ArrayBuffer;
   filename: string;
   type: string;
