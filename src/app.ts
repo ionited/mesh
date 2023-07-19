@@ -31,7 +31,7 @@ export class App {
    * ```ts
    * const app = new App();
    * 
-   * app.any((req, res) => res.json({ success: true }));
+   * app.any('/users', (req, res) => res.json({ success: true }));
    * ```
    */
   any(pattern: string, handler: (req: HttpRequest, res: HttpResponse) => void | Promise<void>) {
@@ -70,7 +70,7 @@ export class App {
    * ```ts
    * const app = new App();
    * 
-   * app.del((req, res) => res.json({ success: true }));
+   * app.del('/users', (req, res) => res.json({ success: true }));
    * ```
    */
   del(pattern: string, handler: (req: HttpRequest, res: HttpResponse) => void | Promise<void>) {
@@ -90,7 +90,7 @@ export class App {
    * ```ts
    * const app = new App();
    * 
-   * app.get((req, res) => res.json({ success: true }));
+   * app.get('/users', (req, res) => res.json({ success: true }));
    * ```
    */
   get(pattern: string, handler: (req: HttpRequest, res: HttpResponse) => void | Promise<void>) {
@@ -131,7 +131,7 @@ export class App {
    * ```ts
    * const app = new App();
    * 
-   * app.options((req, res) => res.json({ success: true }));
+   * app.options('/users', (req, res) => res.json({ success: true }));
    * ```
    */
   options(pattern: string, handler: (req: HttpRequest, res: HttpResponse) => void | Promise<void>) {
@@ -151,7 +151,7 @@ export class App {
    * ```ts
    * const app = new App();
    * 
-   * app.post((req, res) => res.json({ success: true }));
+   * app.post('/users', (req, res) => res.json({ success: true }));
    * ```
    */
   post(pattern: string, handler: (req: HttpRequest, res: HttpResponse) => void | Promise<void>) {
@@ -171,7 +171,7 @@ export class App {
    * ```ts
    * const app = new App();
    * 
-   * app.put((req, res) => res.json({ success: true }));
+   * app.put('/users', (req, res) => res.json({ success: true }));
    * ```
    */
   put(pattern: string, handler: (req: HttpRequest, res: HttpResponse) => void | Promise<void>) {
@@ -233,7 +233,7 @@ export class App {
    * ```ts
    * const app = new App();
    * 
-   * app.use('/user', (req, res) => console.log('Hello World!'));
+   * app.use('/users', (req, res) => console.log('Hello World!'));
    * ```
    */
   use(pattern: string, middleware: (req: HttpRequest, res: HttpResponse) => void | Promise<void>): this;

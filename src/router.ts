@@ -38,7 +38,7 @@ export class Router {
    * ```ts
    * const router = new Router();
    * 
-   * router.any((req, res) => res.json({ success: true }));
+   * router.any('/users', (req, res) => res.json({ success: true }));
    * ```
    */
   any(pattern: string, handler: (req: HttpRequest, res: HttpResponse) => void | Promise<void>) {
@@ -58,7 +58,7 @@ export class Router {
    * ```ts
    * const router = new Router();
    * 
-   * router.del((req, res) => res.json({ success: true }));
+   * router.del('/users', (req, res) => res.json({ success: true }));
    * ```
    */
   del(pattern: string, handler: (req: HttpRequest, res: HttpResponse) => void | Promise<void>) {
@@ -78,7 +78,7 @@ export class Router {
    * ```ts
    * const router = new Router();
    * 
-   * router.get((req, res) => res.json({ success: true }));
+   * router.get('/users', (req, res) => res.json({ success: true }));
    * ```
    */
   get(pattern: string, handler: (req: HttpRequest, res: HttpResponse) => void | Promise<void>) {
@@ -98,7 +98,7 @@ export class Router {
    * ```ts
    * const router = new Router();
    * 
-   * router.options((req, res) => res.json({ success: true }));
+   * router.options('/users', (req, res) => res.json({ success: true }));
    * ```
    */
   options(pattern: string, handler: (req: HttpRequest, res: HttpResponse) => void | Promise<void>) {
@@ -118,7 +118,7 @@ export class Router {
    * ```ts
    * const router = new Router();
    * 
-   * router.post((req, res) => res.json({ success: true }));
+   * router.post('/users', (req, res) => res.json({ success: true }));
    * ```
    */
   post(pattern: string, handler: (req: HttpRequest, res: HttpResponse) => void | Promise<void>) {
@@ -138,7 +138,7 @@ export class Router {
    * ```ts
    * const router = new Router();
    * 
-   * router.put((req, res) => res.json({ success: true }));
+   * router.put('/users', (req, res) => res.json({ success: true }));
    * ```
    */
   put(pattern: string, handler: (req: HttpRequest, res: HttpResponse) => void | Promise<void>) {
@@ -182,7 +182,7 @@ export class Router {
    * ```ts
    * const router = new Router();
    * 
-   * router.use('/user', (req, res) => console.log('Hello World!'));
+   * router.use('/users', (req, res) => console.log('Hello World!'));
    * ```
    */
   use(pattern: string, middleware: (req: HttpRequest, res: HttpResponse) => void | Promise<void>): this;
