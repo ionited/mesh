@@ -1,10 +1,11 @@
 {
   "name": "@ionited/fiber",
-  "version": "0.1.11",
+  "version": "0.2.0",
   "description": "A fast web framework based on uWebSocket.js",
   "main": "./dist/fiber.js",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.3.1",
+    "conventional-changelog-cli": "^3.0.0",
     "typescript": "^5.0.4"
   },
   "files": [
