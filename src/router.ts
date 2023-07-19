@@ -1,10 +1,12 @@
 import { HttpResponse } from './http-response';
 import { HttpRequest } from './http-request';
+import { WebSocketBehavior } from './ws';
 
 export interface Route {
-  method: 'any' | 'del' |  'get' | 'options' | 'post' | 'put' | 'use';
+  method: 'any' | 'del' |  'get' | 'options' | 'post' | 'put' | 'use' | 'ws';
   pattern?: string;
-  handler: (req: HttpRequest, res: HttpResponse) => void | Promise<void>;
+  handler?: (req: HttpRequest, res: HttpResponse) => void | Promise<void>;
+  behavior?: WebSocketBehavior;
 }
 
 export class Router {
@@ -190,6 +192,26 @@ export class Router {
       handler: arg2 as (req: HttpRequest, res: HttpResponse) => void | Promise<void>,
       pattern: this.prefix + arg1
     } : { method: 'use', handler: arg1 });
+
+    return this;
+  }
+
+  /**
+   * Registers WebSockets route
+   * 
+   * @param pattern path to match
+   * @param behavior WebSockets behavior
+   * @returns Router instance
+   * 
+   * @example
+   * ```ts
+   * const router = new Router();
+   * 
+   * router.ws('/ws', { message: () => { } });
+   * ```
+   */
+  ws(pattern: string, behavior: WebSocketBehavior) {
+    this.data.push({ method: 'ws', pattern: this.prefix + pattern, behavior });
 
     return this;
   }

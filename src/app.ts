@@ -3,6 +3,7 @@ import { HttpResponse } from './http-response';
 import { HttpRequest } from './http-request';
 import { parseQuery } from './utils';
 import { Route } from './router';
+import { WebSocketBehavior } from './ws';
 
 export class App {
   private app: TemplatedApp;
@@ -198,8 +199,9 @@ export class App {
    */
   routes(routes: Route[]) {
     for (const r of routes) {
-      if (r.method === 'use') this.use(r.pattern as string, r.handler);
-      else this.register(r.method, r.pattern as string, r.handler);
+      if (r.method === 'use') this.use(r.pattern as string, r.handler as any);
+      else if (r.method === 'ws') this.ws(r.pattern as string, r.behavior as WebSocketBehavior);
+      else this.register(r.method, r.pattern as string, r.handler as any);
     }
 
     return this;
@@ -240,6 +242,36 @@ export class App {
       middleware: arg2 as (req: HttpRequest, res: HttpResponse) => void | Promise<void>,
       pattern: arg1
     } : { middleware: arg1 });
+
+    return this;
+  }
+
+  /**
+   * Handles WebSockets requests
+   * 
+   * @param pattern path to match
+   * @param behavior WebSockets behavior
+   * @returns App instance
+   * 
+   * @example
+   * ```ts
+   * const app = new App();
+   * 
+   * app.ws('/ws', { message: () => { } });
+   * ```
+   */
+  ws(pattern: string, behavior: WebSocketBehavior) {
+    this.app.ws(pattern, {
+      close: (ws, code, message) => {
+        if (behavior.close) behavior.close({ send: (message: string) => ws.send(message) }, code, message);
+      },
+      message: (ws, message) => {
+        if (behavior.message) behavior.message({ send: (message: string) => ws.send(message) }, message);
+      },
+      open: ws => {
+        if (behavior.open) behavior.open({ send: (message: string) => ws.send(message) });
+      }
+    });
 
     return this;
   }
