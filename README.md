@@ -98,6 +98,7 @@ interface HttpRequest {
 
 ```ts
 interface HttpResponse {
+  end(text?: string): void;
   header(key: string, value: string): this;
   json(json: any): void;
   send(text: string): void;

@@ -6,7 +6,7 @@ export class HttpResponse {
   /**
    * Response body
    */
-  body = '';
+  body? = '';
 
   /**
    * Response headers
@@ -20,6 +20,20 @@ export class HttpResponse {
 
   constructor() {
     this.statusCode = this.getStatusCode(200);
+  }
+
+  /**
+   * Ends response
+   * 
+   * @param text Text to response
+   * 
+   * @example
+   * ```
+   * app.get('/users', (req, res) => res.end());
+   * ```
+   */
+  end(text?: string) {
+    this.body = text;
   }
 
   /**
