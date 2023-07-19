@@ -41,6 +41,12 @@ app
 
 .put('/users', (req, res) => res.json({ success: true }))
 
+.ws('/ws', {
+  close: (ws, code, message) => {},
+  message: (ws, message) => {},
+  open: ws => {}
+})
+
 .listen(1000);
 ```
 
@@ -63,7 +69,13 @@ router
 
 .post('/users', (req, res) => res.json({ success: true }))
 
-.put('/users', (req, res) => res.json({ success: true }));
+.put('/users', (req, res) => res.json({ success: true }))
+
+.ws('/ws', {
+  close: (ws, code, message) => {},
+  message: (ws, message) => {},
+  open: ws => {}
+});
 
 const routes = router.routes();
 ```
@@ -101,6 +113,24 @@ interface UploadedFile {
   data: ArrayBuffer;
   filename: string;
   type: string;
+}
+```
+
+### WebSocket
+
+```ts
+interface WebSocket {
+  send(message: string): void;
+}
+```
+
+### WebSocketBehavior
+
+```ts
+export interface WebSocketBehavior {
+  close?: (ws: WebSocket, code: number, message: ArrayBuffer) => void;
+  message?: (ws: WebSocket, message: ArrayBuffer) => void;
+  open?: (ws: WebSocket) => void;
 }
 ```
 
