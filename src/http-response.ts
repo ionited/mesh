@@ -31,7 +31,7 @@ export class HttpResponse {
    * 
    * @example
    * ```
-   * app.get('/user', (req, res) => {
+   * app.get('/users', (req, res) => {
    *  res.header('X-HEADER-ID', '123').json({ success: true });
    * });
    * ```
@@ -49,7 +49,7 @@ export class HttpResponse {
    * 
    * @example
    * ```
-   * app.get('/user', (req, res) => res.json({ success: true }));
+   * app.get('/users', (req, res) => res.json({ success: true }));
    * ```
    */
   json(json: any) {
@@ -63,7 +63,7 @@ export class HttpResponse {
    * 
    * @example
    * ```
-   * app.get('/user', (req, res) => res.send('success'));
+   * app.get('/users', (req, res) => res.send('success'));
    * ```
    */
   send(text: string) {
@@ -77,7 +77,7 @@ export class HttpResponse {
    * 
    * @example
    * ```
-   * app.get('/user', (req, res) => res.sendFile('./uploads/profile.png'));
+   * app.get('/users', (req, res) => res.sendFile('./uploads/profile.png'));
    * ```
    */
   async sendFile(path: string) {
@@ -100,7 +100,7 @@ export class HttpResponse {
    * 
    * @example
    * ```
-   * app.post('/user', (req, res) => res.status(201).json({ success: true }));
+   * app.post('/users', (req, res) => res.status(201).json({ success: true }));
    * ```
    */
   status(status: number) {

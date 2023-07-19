@@ -20,7 +20,7 @@ export class Router {
    * 
    * @example
    * ```
-   * const router = new Router('/user');
+   * const router = new Router('/users');
    * ```
    */
   constructor(prefix?: string) {
