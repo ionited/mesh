@@ -1,5 +1,5 @@
 {
-  "name": "@ionited/fiber",
+  "name": "@topiocom/fiber",
   "version": "0.2.0",
   "description": "A fast web framework based on uWebSocket.js",
   "main": "./dist/fiber.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ionited/fiber.git"
+    "url": "git+https://github.com/topiocom/fiber.git"
   },
   "keywords": [
     "Web",
@@ -22,9 +22,9 @@
   "author": "Ion",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ionited/fiber/issues"
+    "url": "https://github.com/topiocom/fiber/issues"
   },
-  "homepage": "https://github.com/ionited/fiber#readme",
+  "homepage": "https://github.com/topiocom/fiber#readme",
   "dependencies": {
     "uWebSockets.js": "https://github.com/uNetworking/uWebSockets.js/archive/refs/tags/v20.31.0.tar.gz"
   },

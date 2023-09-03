@@ -5,10 +5,10 @@ export const parseQuery = (query: string) => query.split('&').reduce((data, q) =
 
   if (key.endsWith('[]')) {
     const normalizedKey = key.slice(0, -2); // Remove the '[]' suffix
-    if (!data[normalizedKey]) {
+    if (!Array.isArray(data[normalizedKey])) {
       data[normalizedKey] = [];
     }
-    data[normalizedKey].push(value);
+    (data[normalizedKey] as string[]).push(value);
   } else {
     data[key] = value;
   }
