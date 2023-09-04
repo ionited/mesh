@@ -1,4 +1,4 @@
-import { App as uWebSockets, HttpResponse as UHttpResponse, TemplatedApp, getParts } from 'uWebSockets.js';
+import { App as uWebSockets, HttpResponse as UHttpResponse, TemplatedApp, getParts, RecognizedString } from 'uWebSockets.js';
 import { HttpResponse } from './http-response';
 import { HttpRequest } from './http-request';
 import { parseQuery } from './utils';
@@ -112,12 +112,12 @@ export class App {
    * app.listen(1000);
    * ```
    */
-  listen(port: number, cb?: () => void | Promise<void>) {
+  listen(host: string, port: number, cb?: () => void | Promise<void>) {
     this.app.any('/*', res => {
       res.cork(() => res.writeStatus('404 Not Found').end());
     });
 
-    this.app.listen(port, cb ? cb : () => {});
+    this.app.listen(host, port, cb ? cb : () => {});
   }
 
   /**

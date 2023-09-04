@@ -47,7 +47,7 @@ app
   open: ws => {}
 })
 
-.listen(1000);
+.listen("127.0.0.1", 1000);
 ```
 
 ### Router
