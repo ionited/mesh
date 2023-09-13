@@ -89,7 +89,7 @@ interface HttpRequest {
   files: { [key: string]: UploadedFile | undefined } = {};
   headers: { [key: string]: string };
   params: { [key: string]: string };
-  query: { [key: string]: string };
+  query: { [key: string]: any };
   url: string;
 }
 ```

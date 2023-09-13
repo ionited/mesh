@@ -1,7 +1,19 @@
-export const parseQuery = (query: string) => query.split('&').reduce((data, q) => {
-  const parts = q.split('=');
+export const parseQuery = (query: string) => {
+  const
+    result: any = {},
+    parts = query.split('&');
 
-  data[decodeURIComponent(parts[0])] = decodeURIComponent(parts[1]);
+  parts.forEach(p => {
+    const
+      [k, v] = p.split('='),
+      dkey = decodeURIComponent(k),
+      key = dkey.slice(-2) === '[]' ? dkey.slice(0, -2) : dkey,
+      val = decodeURIComponent(v);
 
-  return data;
-}, {} as { [key: string]: string });
+    if (result[key] === undefined) result[key] = val;
+    else if (Array.isArray(result[key])) result[key].push(val);
+    else result[key] = [result[key], val];
+  });
+
+  return result;
+}

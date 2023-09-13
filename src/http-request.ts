@@ -36,7 +36,7 @@ export class HttpRequest {
   /**
    * Request query params
    */
-  query: { [key: string]: string } = {};
+  query: { [key: string]: any } = {};
 
   /**
    * Request URL including initial /slash
