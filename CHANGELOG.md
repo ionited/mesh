@@ -1,9 +1,14 @@
+## [0.2.1](https://github.com/ionited/fiber/compare/0.2.0...0.2.1) (2023-09-13)
+
+### Bug Fixes
+
+* parse array values on query ([9188ed6](https://github.com/ionited/fiber/commit/9188ed6dd42226f1a5b2558b076a13258e6ae162))
+
 # 0.2.0 (2023-07-19)
 
 ### Bug Fixes
 
 * missing function pattern on documentation ([f67edba](https://github.com/ionited/fiber/commit/f67edba65cc1c0eef596c430eb736d6322afd585))
-
 
 ### Features
 
