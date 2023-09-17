@@ -39,6 +39,11 @@ export class HttpRequest {
   query: any = {};
 
   /**
+   * Request query params and body content
+   */
+  inputs: { [key: string]: any } = {};
+
+  /**
    * Request URL including initial /slash
    */
   url: string;
@@ -54,6 +59,7 @@ export class HttpRequest {
     this.getHeaders();
     this.getParams();
     this.getQuery();
+    this.getInputs();
   }
 
   private getHeaders() {
@@ -72,5 +78,42 @@ export class HttpRequest {
     const query = this.req.getQuery();
 
     if (query) this.query = parseQuery(query);
+  }
+
+  private getInputs() {
+    this.inputs = { ...this.query, ...this.body };
+  }
+
+  public post(key: string, defaultValue?: any) {
+    return this.body[key] ?? defaultValue ?? null;
+  }
+
+  public all() {
+    this.getInputs();
+    return this.inputs;
+  }
+  
+  public get(key: string, defaultValue?: any) {
+    return this.inputs[key] ?? defaultValue ?? null;
+  }
+
+  public has(key: string) {
+    return this.inputs[key] !== undefined;
+  }
+
+  public header(key: string, defaultValue?: string) {
+    return this.headers[key] ?? defaultValue ?? null;
+  }
+  
+  public param(key: string, defaultValue?: string) {
+    return this.params[key] ?? defaultValue ?? null;
+  }
+
+  public queryParam(key: string, defaultValue?: string) {
+    return this.query[key] ?? defaultValue ?? null;
+  }
+
+  public file(key: string) {
+    return this.files[key] ?? null;
   }
 }

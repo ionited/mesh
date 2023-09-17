@@ -1,6 +1,6 @@
 {
   "name": "@topiocom/fiber",
-  "version": "0.2.5",
+  "version": "0.2.7",
   "description": "A fast web framework based on uWebSocket.js",
   "main": "./dist/fiber.js",
   "scripts": {
