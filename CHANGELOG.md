@@ -1,3 +1,5 @@
+## [0.2.2](https://github.com/ionited/fiber/compare/0.2.1...0.2.2) (2023-10-05)
+
 ## [0.2.1](https://github.com/ionited/fiber/compare/0.2.0...0.2.1) (2023-09-13)
 
 ### Bug Fixes
