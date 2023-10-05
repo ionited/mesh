@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/ionited/fiber#readme",
   "dependencies": {
-    "uWebSockets.js": "https://github.com/uNetworking/uWebSockets.js/archive/refs/tags/v20.31.0.tar.gz"
+    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.32.0"
   },
   "devDependencies": {
     "@types/node": "^20.3.1",
