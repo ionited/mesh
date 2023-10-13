@@ -1,3 +1,9 @@
+## [0.2.3](https://github.com/ionited/fiber/compare/0.2.1...0.2.3) (2023-10-13)
+
+### Features
+
+* general simplifications ([f5ea979](https://github.com/ionited/fiber/commit/f5ea9799d1bd7797624c59284cbe2f23628b14eb))
+
 ## [0.2.2](https://github.com/ionited/fiber/compare/0.2.1...0.2.2) (2023-10-05)
 
 ## [0.2.1](https://github.com/ionited/fiber/compare/0.2.0...0.2.1) (2023-09-13)
