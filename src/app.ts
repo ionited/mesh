@@ -292,10 +292,14 @@ export class App {
     }));
   }
 
-  private parseBody(body: Buffer, req: HttpRequest) {
-    if (!body) return;
-
+  private async parseBody(res: UHttpResponse, req: HttpRequest) {
     const contentType = req.headers['content-type'];
+
+    if (!contentType) return;
+
+    const body = await this.getBody(res);
+
+    if (!body) return;
 
     if (contentType === 'application/json' || contentType === 'application/x-www-form-urlencoded') {
       const bodyStr = body.toString();
@@ -326,7 +330,7 @@ export class App {
         
       ures.onAborted(() => aborted = true);
 
-      this.parseBody(await this.getBody(ures), req);
+      await this.parseBody(ures, req);
 
       try {
         for (const m of middlewares) await m.middleware(req, res);
@@ -336,13 +340,11 @@ export class App {
         if (this.catchFunction) this.catchFunction(e, req, res);
       }
 
-      if (!aborted) ures.cork(() => {
-        ures.writeStatus(res.statusCode);
-
+      if (!aborted) {
         for (const h in res.headers) ures.writeHeader(h, res.headers[h]);
 
-        ures.end(res.body);
-      });
+        ures.writeStatus(res.statusCode).end(res.body);
+      }
     });
   }
 }
