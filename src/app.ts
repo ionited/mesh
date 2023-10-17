@@ -325,11 +325,13 @@ export class App {
       if (!this.middlewares[i].pattern || pattern.startsWith(this.middlewares[i].pattern as string)) middlewares.push(this.middlewares);
     }
 
-    let aborted = false;
+    let
+      aborted = false,
+      hasParams = pattern.indexOf(':') !== -1;
 
     this.app[method](pattern, async (ures, ureq) => {
       const
-        req = new HttpRequest(ureq, pattern),
+        req = new HttpRequest(ureq, pattern, hasParams),
         res = new HttpResponse();
         
       ures.onAborted(() => aborted = true);

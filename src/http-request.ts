@@ -46,13 +46,14 @@ export class HttpRequest {
   private pattern: string;
   private req: UHttpRequest;
 
-  constructor(req: UHttpRequest, pattern: string) {
+  constructor(req: UHttpRequest, pattern: string, hasParams: boolean) {
     this.req = req;
     this.pattern = pattern;
     this.url = req.getUrl();
 
+    if (hasParams) this.getParams();
+
     this.getHeaders();
-    this.getParams();
     this.getQuery();
   }
 
