@@ -1,3 +1,14 @@
+# [0.3.0](https://github.com/ionited/fiber/compare/0.2.2...0.3.0) (2023-10-17)
+
+### Bug Fixes
+
+* only parse params if it exists ([7d92c58](https://github.com/ionited/fiber/commit/7d92c58aa68b5bab816cbd16fce13809060b10cd))
+
+### Features
+
+* general simplifications ([f5ea979](https://github.com/ionited/fiber/commit/f5ea9799d1bd7797624c59284cbe2f23628b14eb))
+* notFound handler ([a9b3eb4](https://github.com/ionited/fiber/commit/a9b3eb44bdd38b2e4b28fca82f8e37642ab9a09b))
+
 ## [0.2.3](https://github.com/ionited/fiber/compare/0.2.1...0.2.3) (2023-10-13)
 
 ### Features
