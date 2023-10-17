@@ -198,10 +198,10 @@ export class App {
    * ```
    */
   routes(routes: Route[]) {
-    for (const r of routes) {
-      if (r.method === 'use') this.use(r.pattern as string, r.handler as any);
-      else if (r.method === 'ws') this.ws(r.pattern as string, r.behavior as WebSocketBehavior);
-      else this.register(r.method, r.pattern as string, r.handler as any);
+    for (let i = 0; i < routes.length; i++) {
+      if (routes[i].method === 'use') this.use(routes[i].pattern as string, routes[i].handler as any);
+      else if (routes[i].method === 'ws') this.ws(routes[i].pattern as string, routes[i].behavior as WebSocketBehavior);
+      else this.register(routes[i].method as any, routes[i].pattern as string, routes[i].handler as any);
     }
 
     return this;
@@ -319,7 +319,11 @@ export class App {
     pattern: string,
     handler: (req: HttpRequest, res: HttpResponse) => void | Promise<void>
   ) {
-    const middlewares = this.middlewares.filter(m => !m.pattern || pattern.startsWith(m.pattern));
+    const middlewares: any[] = [];
+
+    for (let i = 0; i < this.middlewares.length; i++) {
+      if (!this.middlewares[i].pattern || pattern.startsWith(this.middlewares[i].pattern as string)) middlewares.push(this.middlewares);
+    }
 
     let aborted = false;
 
@@ -333,7 +337,7 @@ export class App {
       await this.parseBody(ures, req);
 
       try {
-        for (const m of middlewares) await m.middleware(req, res);
+        for (let i = 0; i < middlewares.length; i++) await middlewares[i].middleware(req, res); 
 
         await handler(req, res);
       } catch(e) {
