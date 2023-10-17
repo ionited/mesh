@@ -12,6 +12,7 @@ export class App {
     pattern?: string,
     middleware: (req: HttpRequest, res: HttpResponse) => void | Promise<void>
   }[] = [];
+  private notFoundFunction?: (req: HttpRequest, res: HttpResponse) => void | Promise<void>;
 
   /**
    * Creates an app
@@ -113,11 +114,28 @@ export class App {
    * ```
    */
   listen(port: number, cb?: () => void | Promise<void>) {
-    this.app.any('/*', res => {
-      res.cork(() => res.writeStatus('404 Not Found').end());
-    });
+    if (this.notFoundFunction) this.register('any', '/*', this.notFoundFunction);
 
     this.app.listen(port, cb ? cb : () => {});
+  }
+
+  /**
+   * Handles not found routes
+   * 
+   * @param handler not found handler function
+   * @returns App instance
+   * 
+   * @example
+   * ```ts
+   * const app = new App();
+   * 
+   * app.notFound((req, res) => res.status(404).end());
+   * ```
+   */
+  notFound(handler: (req: HttpRequest, res: HttpResponse) => void | Promise<void>) {
+    this.notFoundFunction = handler;
+
+    return this;
   }
 
   /**
