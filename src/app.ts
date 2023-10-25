@@ -1,7 +1,6 @@
-import { App as uWebSockets, HttpResponse as UHttpResponse, TemplatedApp, getParts } from 'uWebSockets.js';
+import { App as uWebSockets, TemplatedApp } from 'uWebSockets.js';
 import { HttpResponse } from './http-response';
 import { HttpRequest } from './http-request';
-import { parseQuery } from './utils';
 import { Route } from './router';
 import { WebSocketBehavior } from './ws';
 
@@ -294,44 +293,6 @@ export class App {
     return this;
   }
 
-  private async getBody(res: UHttpResponse): Promise<Buffer> {
-    let buffer: Buffer;
-
-    return new Promise(resolve => res.onData((ab, isLast) => {
-      const chunk = Buffer.from(ab);
-
-      if (isLast) {
-        if (buffer) resolve(Buffer.concat([buffer, chunk]));
-        else resolve(chunk);
-      } else {
-        if (buffer) buffer = Buffer.concat([buffer, chunk]);
-        else buffer = Buffer.concat([chunk]);
-      }
-    }));
-  }
-
-  private async parseBody(res: UHttpResponse, req: HttpRequest) {
-    const contentType = req.headers['content-type'];
-
-    if (!contentType) return;
-
-    const body = await this.getBody(res);
-
-    if (!body) return;
-
-    if (contentType === 'application/json' || contentType === 'application/x-www-form-urlencoded') {
-      const bodyStr = body.toString();
-      
-      if (!bodyStr) return;
-
-      req.body = contentType === 'application/json' ? JSON.parse(body.toString()) : parseQuery(body.toString());
-    } else if (contentType?.startsWith('multipart/form-data')) getParts(body, contentType)?.forEach(p => {
-      if (p.type && p.filename) req.files[p.name] = { data: p.data, filename: p.filename, type: p.type };
-      else req.body[p.name] = Buffer.from(p.data).toString();
-    });
-    else req.body = body;
-  }
-
   private register(
     method: 'any' | 'del' |  'get' | 'options' | 'post' | 'put',
     pattern: string,
@@ -343,18 +304,14 @@ export class App {
       if (!this.middlewares[i].pattern || pattern.startsWith(this.middlewares[i].pattern as string)) middlewares.push(this.middlewares);
     }
 
-    let
-      aborted = false,
-      hasParams = pattern.indexOf(':') !== -1;
-
     this.app[method](pattern, async (ures, ureq) => {
       const
-        req = new HttpRequest(ureq, pattern, hasParams),
+        req = new HttpRequest(ureq, ures, pattern),
         res = new HttpResponse();
+
+      let aborted = false;
         
       ures.onAborted(() => aborted = true);
-
-      await this.parseBody(ures, req);
 
       try {
         for (let i = 0; i < middlewares.length; i++) await middlewares[i].middleware(req, res); 

@@ -86,13 +86,13 @@ const routes = router.routes();
 
 ```ts
 interface HttpRequest {
-  body: { [key: string]: any };
+  body(): Promise<{ [key: string]: any }>;
   data: { [key: string]: any };
-  files: { [key: string]: UploadedFile | undefined } = {};
-  headers: { [key: string]: string };
-  params: { [key: string]: string };
-  query: { [key: string]: any };
-  url: string;
+  files(): Promise<{ [key: string]: UploadedFile | undefined }>;
+  headers(): { [key: string]: string };
+  params(): { [key: string]: string };
+  query(): { [key: string]: any };
+  url(): string;
 }
 ```
 
