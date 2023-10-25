@@ -1,3 +1,13 @@
+# [0.4.0](https://github.com/ionited/fiber/compare/0.3.0...0.4.0) (2023-10-25)
+
+### Features
+
+* improve performance getting props on demand ([fbe7a34](https://github.com/ionited/fiber/commit/fbe7a3496b28639e1e32cc67405f3dd642fbcf6a))
+
+### BREAKING CHANGES
+
+* HttpRequest body, files, headers, params, query and url is now functions
+
 # [0.3.0](https://github.com/ionited/fiber/compare/0.2.2...0.3.0) (2023-10-17)
 
 ### Bug Fixes
