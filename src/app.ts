@@ -1,7 +1,6 @@
-import { App as uWebSockets, HttpResponse as UHttpResponse, TemplatedApp, getParts, RecognizedString } from 'uWebSockets.js';
+import { App as uWebSockets, TemplatedApp } from 'uWebSockets.js';
 import { HttpResponse } from './http-response';
 import { HttpRequest } from './http-request';
-import { parseQuery } from './utils';
 import { Route } from './router';
 import { WebSocketBehavior } from './ws';
 
@@ -12,6 +11,7 @@ export class App {
     pattern?: string,
     middleware: (req: HttpRequest, res: HttpResponse) => void | Promise<void>
   }[] = [];
+  private notFoundFunction?: (req: HttpRequest, res: HttpResponse) => void | Promise<void>;
 
   /**
    * Creates an app
@@ -121,6 +121,25 @@ export class App {
   }
 
   /**
+   * Handles not found routes
+   * 
+   * @param handler not found handler function
+   * @returns App instance
+   * 
+   * @example
+   * ```ts
+   * const app = new App();
+   * 
+   * app.notFound((req, res) => res.status(404).end());
+   * ```
+   */
+  notFound(handler: (req: HttpRequest, res: HttpResponse) => void | Promise<void>) {
+    this.notFoundFunction = handler;
+
+    return this;
+  }
+
+  /**
    * Handles `OPTIONS` requests
    * 
    * @param pattern path to match
@@ -198,10 +217,10 @@ export class App {
    * ```
    */
   routes(routes: Route[]) {
-    for (const r of routes) {
-      if (r.method === 'use') this.use(r.pattern as string, r.handler as any);
-      else if (r.method === 'ws') this.ws(r.pattern as string, r.behavior as WebSocketBehavior);
-      else this.register(r.method, r.pattern as string, r.handler as any);
+    for (let i = 0; i < routes.length; i++) {
+      if (routes[i].method === 'use') this.use(routes[i].pattern as string, routes[i].handler as any);
+      else if (routes[i].method === 'ws') this.ws(routes[i].pattern as string, routes[i].behavior as WebSocketBehavior);
+      else this.register(routes[i].method as any, routes[i].pattern as string, routes[i].handler as any);
     }
 
     return this;
@@ -276,73 +295,39 @@ export class App {
     return this;
   }
 
-  private async getBody(res: UHttpResponse): Promise<Buffer> {
-    let buffer: Buffer;
-
-    return new Promise(resolve => res.onData((ab, isLast) => {
-      const chunk = Buffer.from(ab);
-
-      if (isLast) {
-        if (buffer) resolve(Buffer.concat([buffer, chunk]));
-        else resolve(chunk);
-      } else {
-        if (buffer) buffer = Buffer.concat([buffer, chunk]);
-        else buffer = Buffer.concat([chunk]);
-      }
-    }));
-  }
-
-  private parseBody(body: Buffer, req: HttpRequest) {
-    if (!body) return;
-
-    const contentType = req.headers['content-type'];
-
-    if (contentType === 'application/json' || contentType === 'application/x-www-form-urlencoded') {
-      const bodyStr = body.toString();
-      
-      if (!bodyStr) return;
-
-      req.body = contentType === 'application/json' ? JSON.parse(body.toString()) : parseQuery(body.toString());
-    } else if (contentType?.startsWith('multipart/form-data')) getParts(body, contentType)?.forEach(p => {
-      if (p.type && p.filename) req.files[p.name] = { data: p.data, filename: p.filename, type: p.type };
-      else req.body[p.name] = Buffer.from(p.data).toString();
-    });
-    else req.body = body;
-  }
-
   private register(
     method: 'any' | 'del' |  'get' | 'options' | 'post' | 'put',
     pattern: string,
     handler: (req: HttpRequest, res: HttpResponse) => void | Promise<void>
   ) {
-    const middlewares = this.middlewares.filter(m => !m.pattern || pattern.startsWith(m.pattern));
+    const middlewares: any[] = [];
 
-    let aborted = false;
+    for (let i = 0; i < this.middlewares.length; i++) {
+      if (!this.middlewares[i].pattern || pattern.startsWith(this.middlewares[i].pattern as string)) middlewares.push(this.middlewares);
+    }
 
     this.app[method](pattern, async (ures, ureq) => {
       const
-        req = new HttpRequest(ureq, pattern),
+        req = new HttpRequest(ureq, ures, pattern),
         res = new HttpResponse();
+
+      let aborted = false;
         
       ures.onAborted(() => aborted = true);
 
-      this.parseBody(await this.getBody(ures), req);
-
       try {
-        for (const m of middlewares) await m.middleware(req, res);
+        for (let i = 0; i < middlewares.length; i++) await middlewares[i].middleware(req, res); 
 
         await handler(req, res);
       } catch(e) {
         if (this.catchFunction) this.catchFunction(e, req, res);
       }
 
-      if (!aborted) ures.cork(() => {
-        ures.writeStatus(res.statusCode);
-
+      if (!aborted) {
         for (const h in res.headers) ures.writeHeader(h, res.headers[h]);
 
-        ures.end(res.body);
-      });
+        ures.writeStatus(res.statusCode).end(res.body);
+      }
     });
   }
 }

@@ -29,6 +29,8 @@ app
 
 .catch((e, req, res) => res.status(e.status ?? 500).json({ message: e.message ?? 'Internal server error' }))
 
+.notFound((req, res) => res.status(404).end())
+
 .any('/users', (req, res) => res.json({ success: true }))
 
 .del('/users', (req, res) => res.json({ success: true }))
@@ -84,13 +86,13 @@ const routes = router.routes();
 
 ```ts
 interface HttpRequest {
-  body: { [key: string]: any };
+  body(): Promise<{ [key: string]: any }>;
   data: { [key: string]: any };
-  files: { [key: string]: UploadedFile | undefined } = {};
-  headers: { [key: string]: string };
-  params: { [key: string]: string };
-  query: { [key: string]: string };
-  url: string;
+  files(): Promise<{ [key: string]: UploadedFile | undefined }>;
+  headers(): { [key: string]: string };
+  params(): { [key: string]: string };
+  query(): { [key: string]: any };
+  url(): string;
 }
 ```
 
@@ -138,3 +140,5 @@ export interface WebSocketBehavior {
 ## License
 
 Copyright (c) 2023 Ion. Licensed under [MIT License](LICENSE).
+
+[https://ionited.io](https://ionited.io)

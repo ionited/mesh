@@ -16,11 +16,7 @@ export class HttpResponse {
   /**
    * Response status
    */
-  statusCode: string;
-
-  constructor() {
-    this.statusCode = this.getStatusCode(200);
-  }
+  statusCode = '200 OK';
 
   /**
    * Ends response
