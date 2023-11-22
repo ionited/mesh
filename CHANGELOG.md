@@ -1,3 +1,9 @@
+## [0.4.2](https://github.com/ionited/fiber/compare/0.4.1...0.4.2) (2023-11-22)
+
+### Bug Fixes
+
+* cork response ([69728aa](https://github.com/ionited/fiber/commit/69728aacbb055fc3471ddd334f7278d29cd6fc30))
+
 ## [0.4.1](https://github.com/ionited/fiber/compare/0.4.0...0.4.1) (2023-11-22)
 
 ### Bug Fixes
