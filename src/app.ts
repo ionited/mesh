@@ -301,7 +301,7 @@ export class App {
     const middlewares: any[] = [];
 
     for (let i = 0; i < this.middlewares.length; i++) {
-      if (!this.middlewares[i].pattern || pattern.startsWith(this.middlewares[i].pattern as string)) middlewares.push(this.middlewares);
+      if (!this.middlewares[i].pattern || pattern.startsWith(this.middlewares[i].pattern as string)) middlewares.push(this.middlewares[i]);
     }
 
     this.app[method](pattern, async (ures, ureq) => {
