@@ -321,11 +321,13 @@ export class App {
         if (this.catchFunction) this.catchFunction(e, req, res);
       }
 
-      if (!aborted) {
+      if (!aborted) ures.cork(() => {
+        ures.writeStatus(res.statusCode);
+
         for (const h in res.headers) ures.writeHeader(h, res.headers[h]);
 
-        ures.writeStatus(res.statusCode).end(res.body);
-      }
+        ures.end(res.body);
+      });
     });
   }
 }
