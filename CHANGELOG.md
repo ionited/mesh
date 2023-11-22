@@ -1,3 +1,9 @@
+## [0.4.1](https://github.com/ionited/fiber/compare/0.4.0...0.4.1) (2023-11-22)
+
+### Bug Fixes
+
+* filter middlewares correctly ([d959467](https://github.com/ionited/fiber/commit/d9594677168cdaf5936d6c93939cc58832a8696c))
+
 # [0.4.0](https://github.com/ionited/fiber/compare/0.3.0...0.4.0) (2023-10-25)
 
 ### Features
