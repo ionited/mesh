@@ -8,6 +8,8 @@ export class HttpResponse {
    */
   body? = '';
 
+  hasHeaders = false;
+
   /**
    * Response headers
    */
@@ -16,7 +18,7 @@ export class HttpResponse {
   /**
    * Response status
    */
-  statusCode = '200 OK';
+  statusCode?: string;
 
   /**
    * Ends response
@@ -48,6 +50,8 @@ export class HttpResponse {
    */
   header(key: string, value: string) {
     this.headers[key] = value;
+
+    this.hasHeaders = true;
 
     return this;
   }

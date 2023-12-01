@@ -321,13 +321,18 @@ export class App {
         if (this.catchFunction) this.catchFunction(e, req, res);
       }
 
-      if (!aborted) ures.cork(() => {
-        ures.writeStatus(res.statusCode);
-
-        for (const h in res.headers) ures.writeHeader(h, res.headers[h]);
-
-        ures.end(res.body);
-      });
+      if (!aborted) {
+        if (res.hasHeaders || res.statusCode) ures.cork(() => {
+          if (res.statusCode) ures.writeStatus(res.statusCode);
+  
+          if (res.hasHeaders) {
+            for (const h in res.headers) ures.writeHeader(h, res.headers[h]);
+          }
+  
+          ures.end(res.body);
+        });
+        else ures.end(res.body);
+      }
     });
   }
 }
