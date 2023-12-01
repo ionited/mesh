@@ -1,3 +1,9 @@
+## [0.4.3](https://github.com/ionited/fiber/compare/0.4.2...0.4.3) (2023-12-01)
+
+### Features
+
+* small performance improvements ([878fb0b](https://github.com/ionited/fiber/commit/878fb0b696a083d8450c36d9a1ade7d148b8db51))
+
 ## [0.4.2](https://github.com/ionited/fiber/compare/0.4.1...0.4.2) (2023-11-22)
 
 ### Bug Fixes
