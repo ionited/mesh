@@ -1,3 +1,9 @@
+## [0.4.4](https://github.com/ionited/fiber/compare/0.4.3...0.4.4) (2023-12-05)
+
+### Bug Fixes
+
+* cache content-type ([6c2fe29](https://github.com/ionited/fiber/commit/6c2fe292b6c29f6fe868f82c51ce7d9293a775f8))
+
 ## [0.4.3](https://github.com/ionited/fiber/compare/0.4.2...0.4.3) (2023-12-01)
 
 ### Features
