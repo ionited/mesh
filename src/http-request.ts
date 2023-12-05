@@ -14,6 +14,7 @@ export class HttpRequest {
   data: { [key: string]: any } = {};
 
   private bodyData: Buffer | null = null;
+  private contentType = '';
   private pattern: string;
   private req: UHttpRequest;
   private res: UHttpResponse;
@@ -28,9 +29,9 @@ export class HttpRequest {
    * Request body content
    */
   async body(): Promise<{ [key: string]: any }> {
-    const contentType = this.req.getHeader('content-type');
+    this.contentType = this.contentType ? this.contentType : this.req.getHeader('content-type');
 
-    if (!contentType) return {};
+    if (!this.contentType) return {};
 
     const body = this.bodyData ? this.bodyData : await this.getBody(this.res);
 
@@ -38,16 +39,16 @@ export class HttpRequest {
 
     this.bodyData = body;
 
-    if (contentType === 'application/json' || contentType === 'application/x-www-form-urlencoded') {
+    if (this.contentType === 'application/json' || this.contentType === 'application/x-www-form-urlencoded') {
       const bodyStr = body.toString();
       
       if (!bodyStr) return {};
 
-      return contentType === 'application/json' ? JSON.parse(body.toString()) : parseQuery(body.toString());
-    } else if (contentType?.startsWith('multipart/form-data')) {
+      return this.contentType === 'application/json' ? JSON.parse(body.toString()) : parseQuery(body.toString());
+    } else if (this.contentType.startsWith('multipart/form-data')) {
       const data: any = {};
 
-      getParts(body, contentType)?.forEach(p => {
+      getParts(body, this.contentType)?.forEach(p => {
         if (!p.type && !p.filename) data[p.name] = Buffer.from(p.data).toString();
       });
 
@@ -59,9 +60,9 @@ export class HttpRequest {
    * Request body content
    */
   async files(): Promise<{ [key: string]: UploadedFile | undefined }> {
-    const contentType = this.req.getHeader('content-type');
+    this.contentType = this.contentType ? this.contentType : this.req.getHeader('content-type');
 
-    if (!contentType) return {}
+    if (!this.contentType) return {}
 
     const body = this.bodyData ? this.bodyData : await this.getBody(this.res);
 
@@ -69,10 +70,10 @@ export class HttpRequest {
 
     this.bodyData = body;
 
-    if (contentType?.startsWith('multipart/form-data')) {
+    if (this.contentType.startsWith('multipart/form-data')) {
       const data: any = {};
 
-      getParts(body, contentType)?.forEach(p => {
+      getParts(body, this.contentType)?.forEach(p => {
         if (p.type && p.filename) data[p.name] = { data: p.data, filename: p.filename, type: p.type };
       });
 
