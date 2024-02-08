@@ -1,6 +1,9 @@
-# Fiber
+# Mesh
 
 > A fast web framework based on uWebSocket.js
+
+> [!NOTE]
+> The project was renamed from Fiber to Mesh to avoid confusion with other Web Framework project
 
 ## About uWebSockets.js
 
@@ -11,7 +14,7 @@
 ### Install with NPM
 
 ```
-npm i @ionited/fiber
+npm i @ionited/mesh
 ```
 
 ---

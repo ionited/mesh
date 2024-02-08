@@ -1,15 +1,15 @@
 {
-  "name": "@ionited/fiber",
-  "version": "0.4.4",
+  "name": "@ionited/mesh",
+  "version": "0.5.0",
   "description": "A fast web framework based on uWebSocket.js",
-  "main": "./dist/fiber.js",
+  "main": "./dist/mesh.js",
   "scripts": {
     "build": "tsc",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ionited/fiber.git"
+    "url": "git+https://github.com/ionited/mesh.git"
   },
   "keywords": [
     "Web",
@@ -17,14 +17,15 @@
     "Socket",
     "uWebSocket.js",
     "Fiber",
+    "Mesh",
     "HTTP"
   ],
   "author": "Ion",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ionited/fiber/issues"
+    "url": "https://github.com/ionited/mesh/issues"
   },
-  "homepage": "https://github.com/ionited/fiber#readme",
+  "homepage": "https://github.com/ionited/mesh#readme",
   "dependencies": {
     "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.34.0"
   },
