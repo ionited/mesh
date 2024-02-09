@@ -1,3 +1,9 @@
+## [0.5.1](https://github.com/ionited/mesh/compare/0.5.0...0.5.1) (2024-02-09)
+
+### Features
+
+* improve req.params() performance ([b17758b](https://github.com/ionited/mesh/commit/b17758bea25246599eb8953dc97963dfeab8aa60))
+
 # [0.5.0](https://github.com/ionited/mesh/compare/0.4.4...0.5.0) (2024-02-09)
 
 ### Features
