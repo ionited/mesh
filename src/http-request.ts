@@ -102,7 +102,7 @@ export class HttpRequest {
 
     const data: any = {};
 
-    for (let i = 0; i < params.length; i++) data[params[i].replace(':', '')] = this.req.getParameter(i);
+    for (let i = 0; i < params.length; i++) data[params[i].slice(1)] = this.req.getParameter(i);
 
     return data;
   }
