@@ -24,6 +24,8 @@ npm i @ionited/mesh
 ### App
 
 ```ts
+import { App } from '@ionited/mesh';
+
 const app = new App();
 
 app
@@ -58,7 +60,9 @@ app
 ### Router
 
 ```ts
-const router = new Router('/public')
+import { Router } from '@ionited/mesh';
+
+const router = new Router('/public');
 
 router
 
@@ -83,6 +87,8 @@ router
 });
 
 const routes = router.routes();
+
+app.routes(routes);
 ```
 
 ### HttpRequest
