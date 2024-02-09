@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/ionited/mesh#readme",
   "dependencies": {
-    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.34.0"
+    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.41.0"
   },
   "devDependencies": {
     "@types/node": "^20.3.1",
