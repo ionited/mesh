@@ -1,3 +1,9 @@
+# [0.5.0](https://github.com/ionited/mesh/compare/0.4.4...0.5.0) (2024-02-09)
+
+### Features
+
+* project renamed to Mesh ([26e3899](https://github.com/ionited/mesh/commit/26e389923fbb54a4d11b0317c774c9b4bc53cb8d))
+
 ## [0.4.4](https://github.com/ionited/mhshcompare/0.4.3...0.4.4) (2023-12-05)
 
 ### Bug Fixes
