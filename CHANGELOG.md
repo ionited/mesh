@@ -1,3 +1,9 @@
+## [0.5.2](https://github.com/ionited/mesh/compare/0.5.1...0.5.2) (2024-02-20)
+
+### Features
+
+* parse param keys just once ([e4e3886](https://github.com/ionited/mesh/commit/e4e38864dfeaf4328c5962053a8d939c3bc9ac22))
+
 ## [0.5.1](https://github.com/ionited/mesh/compare/0.5.0...0.5.1) (2024-02-09)
 
 ### Features
