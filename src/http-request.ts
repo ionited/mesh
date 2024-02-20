@@ -15,14 +15,14 @@ export class HttpRequest {
 
   private bodyData: Buffer | null = null;
   private contentType = '';
-  private pattern: string;
+  private paramKeys: string[];
   private req: UHttpRequest;
   private res: UHttpResponse;
 
-  constructor(req: UHttpRequest, res: UHttpResponse, pattern: string) {
+  constructor(req: UHttpRequest, res: UHttpResponse, paramKeys: string[]) {
     this.req = req;
     this.res = res;
-    this.pattern = pattern;
+    this.paramKeys = paramKeys;
   }
 
   /**
@@ -96,13 +96,9 @@ export class HttpRequest {
    * Request path params
    */
   params(): { [key: string]: string } {
-    const params = this.pattern.match(/:[\w]+/g);
-
-    if (!params) return {};
-
     const data: any = {};
 
-    for (let i = 0; i < params.length; i++) data[params[i].slice(1)] = this.req.getParameter(i);
+    for (let i = 0; i < this.paramKeys.length; i++) data[this.paramKeys[i].slice(1)] = this.req.getParameter(i);
 
     return data;
   }
