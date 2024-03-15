@@ -103,6 +103,7 @@ interface HttpRequest {
   method(): string;
   params(): { [key: string]: string };
   query(): { [key: string]: any };
+  route: string;
   url(): string;
 }
 ```

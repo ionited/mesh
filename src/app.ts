@@ -308,7 +308,7 @@ export class App {
 
     this.app[method](pattern, async (ures, ureq) => {
       const
-        req = new HttpRequest(ureq, ures, paramKeys),
+        req = new HttpRequest(ureq, ures, pattern, paramKeys),
         res = new HttpResponse();
 
       let aborted = false;

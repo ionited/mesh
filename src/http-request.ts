@@ -13,15 +13,21 @@ export class HttpRequest {
    */
   data: { [key: string]: any } = {};
 
+  /**
+   * Route pattern
+   */
+  route: string;
+
   private bodyData: Buffer | null = null;
   private contentType = '';
   private paramKeys: string[];
   private req: UHttpRequest;
   private res: UHttpResponse;
 
-  constructor(req: UHttpRequest, res: UHttpResponse, paramKeys: string[]) {
+  constructor(req: UHttpRequest, res: UHttpResponse, pattern: string, paramKeys: string[]) {
     this.req = req;
     this.res = res;
+    this.route = pattern;
     this.paramKeys = paramKeys;
   }
 
