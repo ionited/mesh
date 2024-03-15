@@ -100,6 +100,7 @@ interface HttpRequest {
   data: { [key: string]: any };
   files(): Promise<{ [key: string]: UploadedFile | undefined }>;
   headers(): { [key: string]: string };
+  method(): string;
   params(): { [key: string]: string };
   query(): { [key: string]: any };
   url(): string;

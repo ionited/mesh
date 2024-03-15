@@ -93,6 +93,13 @@ export class HttpRequest {
   }
 
   /**
+   * Lowercased HTTP method
+   */
+  method() {
+    return this.req.getMethod();
+  }
+
+  /**
    * Request path params
    */
   params(): { [key: string]: string } {
