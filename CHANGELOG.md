@@ -1,3 +1,11 @@
+# [0.6.0](https://github.com/ionited/mesh/compare/0.5.2...0.6.0) (2024-03-15)
+
+### Features
+
+* add GitHub sponsors ([6cbed8e](https://github.com/ionited/mesh/commit/6cbed8eff06b73a00193769d2d511328f7d05b95))
+* add req.method() ([84f29e2](https://github.com/ionited/mesh/commit/84f29e2d749bb6b0046f589f24128a4e1300f2e6))
+* add req.route property ([94c79e7](https://github.com/ionited/mesh/commit/94c79e74177d17ff737e35fcf24b45a41ede5845))
+
 ## [0.5.2](https://github.com/ionited/mesh/compare/0.5.1...0.5.2) (2024-02-20)
 
 ### Features
