@@ -1,3 +1,9 @@
+## [0.6.1](https://github.com/ionited/mesh/compare/0.6.0...0.6.1) (2024-07-09)
+
+### Bug Fixes
+
+* return array of files correctly ([7a32ab6](https://github.com/ionited/mesh/commit/7a32ab6107cc3ebb5147827f6890eb83bae21d95))
+
 # [0.6.0](https://github.com/ionited/mesh/compare/0.5.2...0.6.0) (2024-03-15)
 
 ### Features
