@@ -80,7 +80,15 @@ export class HttpRequest {
       const data: any = {};
 
       getParts(body, this.contentType)?.forEach(p => {
-        if (p.type && p.filename) data[p.name] = { data: p.data, filename: p.filename, type: p.type };
+        if (p.type && p.filename) {
+          const
+            name = p.name.slice(-2) === '[]' ? p.name.slice(0, -2) : p.name,
+            value = { data: p.data, filename: p.filename, type: p.type };
+
+          if (data[name] === undefined) data[name] = p.name.slice(-2) === '[]' ? [value] : value;
+          else if (Array.isArray(data[name])) data[name].push(value);
+          else data[name] = [data[name], value];
+        }
       });
 
       return data;
