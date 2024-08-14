@@ -1,3 +1,9 @@
+## [0.6.2](https://github.com/ionited/mesh/compare/0.6.0...0.6.2) (2024-08-14)
+
+### Bug Fixes
+
+* pass original Websocket ([c514598](https://github.com/ionited/mesh/commit/c514598b2ca907bc45fc69c54cf12346973bd398))
+
 ## [0.6.1](https://github.com/ionited/mesh/compare/0.6.0...0.6.1) (2024-07-09)
 
 ### Bug Fixes
