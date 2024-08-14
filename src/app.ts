@@ -280,13 +280,13 @@ export class App {
   ws(pattern: string, behavior: WebSocketBehavior) {
     this.app.ws(pattern, {
       close: (ws, code, message) => {
-        if (behavior.close) behavior.close({ send: (message: string) => ws.send(message) }, code, message);
+        if (behavior.close) behavior.close(ws, code, message);
       },
       message: (ws, message) => {
-        if (behavior.message) behavior.message({ send: (message: string) => ws.send(message) }, message);
+        if (behavior.message) behavior.message(ws, message);
       },
       open: ws => {
-        if (behavior.open) behavior.open({ send: (message: string) => ws.send(message) });
+        if (behavior.open) behavior.open(ws);
       }
     });
 
