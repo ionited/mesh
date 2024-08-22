@@ -41,7 +41,7 @@ export class HttpRequest {
 
     const body = this.bodyData ? this.bodyData : await this.getBody(this.res);
 
-    if (!body) return {};
+    if (!body?.length) return {};
 
     this.bodyData = body;
 
@@ -50,7 +50,7 @@ export class HttpRequest {
       
       if (!bodyStr) return {};
 
-      return this.contentType === 'application/json' ? JSON.parse(body.toString()) : parseQuery(body.toString());
+      return this.contentType === 'application/json' ? JSON.parse(bodyStr) : parseQuery(bodyStr);
     } else if (this.contentType.startsWith('multipart/form-data')) {
       const data: any = {};
 
