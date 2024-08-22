@@ -41,9 +41,9 @@ export class HttpRequest {
 
     const body = this.bodyData ? this.bodyData : await this.getBody(this.res);
 
-    if (!body?.length) return {};
-
     this.bodyData = body;
+
+    if (!body?.length) return {};
 
     if (this.contentType === 'application/json' || this.contentType === 'application/x-www-form-urlencoded') {
       const bodyStr = body.toString();
@@ -68,13 +68,13 @@ export class HttpRequest {
   async files(): Promise<{ [key: string]: UploadedFile | undefined }> {
     this.contentType = this.contentType ? this.contentType : this.req.getHeader('content-type');
 
-    if (!this.contentType) return {}
+    if (!this.contentType) return {};
 
     const body = this.bodyData ? this.bodyData : await this.getBody(this.res);
 
-    if (!body) return {};
-
     this.bodyData = body;
+
+    if (!body?.length) return {};
 
     if (this.contentType.startsWith('multipart/form-data')) {
       const data: any = {};
