@@ -1,3 +1,9 @@
+## [0.6.3](https://github.com/ionited/mesh/compare/0.6.2...0.6.3) (2024-08-22)
+
+### Bug Fixes
+
+* check null body ([d938cc1](https://github.com/ionited/mesh/commit/d938cc1c801adf501c9512d89bb95032ac9a30b7))
+
 ## [0.6.2](https://github.com/ionited/mesh/compare/0.6.0...0.6.2) (2024-08-14)
 
 ### Bug Fixes
