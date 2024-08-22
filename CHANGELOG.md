@@ -1,3 +1,9 @@
+## [0.6.4](https://github.com/ionited/mesh/compare/0.6.3...0.6.4) (2024-08-22)
+
+### Bug Fixes
+
+* check null files ([e0b8295](https://github.com/ionited/mesh/commit/e0b829510f8a009ad159963303fa5944b85ab233))
+
 ## [0.6.3](https://github.com/ionited/mesh/compare/0.6.2...0.6.3) (2024-08-22)
 
 ### Bug Fixes
