@@ -1,3 +1,5 @@
+## [0.6.5](https://github.com/ionited/mesh/compare/0.6.4...0.6.5) (2025-01-28)
+
 ## [0.6.4](https://github.com/ionited/mesh/compare/0.6.3...0.6.4) (2024-08-22)
 
 ### Bug Fixes
