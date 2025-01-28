@@ -1,6 +1,6 @@
 {
   "name": "@ionited/mesh",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "description": "A fast web framework based on uWebSocket.js",
   "main": "./dist/mesh.js",
   "scripts": {
@@ -27,12 +27,12 @@
   },
   "homepage": "https://github.com/ionited/mesh#readme",
   "dependencies": {
-    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.44.0"
+    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.51.0"
   },
   "devDependencies": {
-    "@types/node": "^20.3.1",
+    "@types/node": "^22.12.0",
     "conventional-changelog-cli": "^3.0.0",
-    "typescript": "^5.0.4"
+    "typescript": "^5.7.3"
   },
   "files": [
     "dist/*"
