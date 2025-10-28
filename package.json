@@ -1,6 +1,6 @@
 {
   "name": "@ionited/mesh",
-  "version": "0.6.5",
+  "version": "0.6.6",
   "description": "A fast web framework based on uWebSocket.js",
   "main": "./dist/mesh.js",
   "scripts": {
