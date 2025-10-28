@@ -316,7 +316,7 @@ export class App {
       ures.onAborted(() => aborted = true);
 
       try {
-        for (let i = 0; i < middlewares.length; i++) await middlewares[i].middleware(req, res); 
+        for (let i = 0; i < middlewares.length; i++) await middlewares[i].middleware(req, res);
 
         await handler(req, res);
       } catch(e) {
