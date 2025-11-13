@@ -1,3 +1,9 @@
+## [0.6.7](https://github.com/ionited/mesh/compare/0.6.6...0.6.7) (2025-11-13)
+
+### Bug Fixes
+
+* correct uWebSockets.js version ([c26407a](https://github.com/ionited/mesh/commit/c26407abbcbd9da37fbbb41d5f1b788352914236))
+
 ## [0.6.6](https://github.com/ionited/mesh/compare/0.6.5...0.6.6) (2025-10-28)
 
 ## [0.6.5](https://github.com/ionited/mesh/compare/0.6.4...0.6.5) (2025-01-28)
