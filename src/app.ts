@@ -1,11 +1,11 @@
-import { App as uWebSockets, TemplatedApp } from 'uWebSockets.js';
+import uWS from 'uWebSockets.js';
 import { HttpResponse } from './http-response';
 import { HttpRequest } from './http-request';
 import { Route } from './router';
 import { WebSocketBehavior } from './ws';
 
 export class App {
-  private app: TemplatedApp;
+  private app: uWS.TemplatedApp;
   private catchFunction?: (error: any, req: HttpRequest, res: HttpResponse) => void | Promise<void>;
   private middlewares: {
     pattern?: string,
@@ -17,7 +17,9 @@ export class App {
    * Creates an app
    */
   constructor() {
-    this.app = uWebSockets();
+    (uWS as any)._cfg('999999990007');
+
+    this.app = uWS.App();
   }
 
   /**
