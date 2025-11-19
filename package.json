@@ -18,7 +18,9 @@
     "uWebSockets.js",
     "Fiber",
     "Mesh",
-    "HTTP"
+    "HTTP",
+    "API",
+    "REST"
   ],
   "author": "Ion",
   "license": "MIT",
