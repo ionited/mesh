@@ -1,3 +1,9 @@
+# [0.7.0](https://github.com/ionited/mesh/compare/0.6.7...0.7.0) (2025-11-19)
+
+### Features
+
+* disable uWebSockets header ([3fd233e](https://github.com/ionited/mesh/commit/3fd233e7babced7433aa3da3637324735ba17f59))
+
 ## [0.6.7](https://github.com/ionited/mesh/compare/0.6.6...0.6.7) (2025-11-13)
 
 ### Bug Fixes
