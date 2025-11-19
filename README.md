@@ -1,7 +1,7 @@
 # Mesh
 
 > [!WARNING]
-> **This is Mesh**. A fast web framework based on uWebSocket.js
+> **This is Mesh**. A fast web framework based on uWebSockets.js
 
 > [!NOTE]
 > The project was renamed from Fiber to Mesh to avoid confusion with other Web Framework project
