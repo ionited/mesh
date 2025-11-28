@@ -1,0 +1,17 @@
+{
+  "editor.codeLens": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "typescript.referencesCodeLens.enabled": true,
+  "typescript.referencesCodeLens.showOnAllFunctions": true,
+  "explorer.compactFolders": false,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.DS_Store": true,
+    "**/.npmrc": true,
+    "**/.eslint*": true,
+    "**/.vscodeignore": true,
+    "**/node_modules": true
+  }
+}
