@@ -1,3 +1,9 @@
+## [0.7.2](https://github.com/ionited/mesh/compare/0.7.1...0.7.2) (2026-04-16)
+
+### Features
+
+* improve params parse ([3447cd5](https://github.com/ionited/mesh/commit/3447cd5532f5c2f4837b800c4fee43997d4ef5ff))
+
 ## [0.7.1](https://github.com/ionited/mesh/compare/0.7.0...0.7.1) (2026-04-16)
 
 # [0.7.0](https://github.com/ionited/mesh/compare/0.6.7...0.7.0) (2025-11-19)
