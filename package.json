@@ -29,12 +29,12 @@
   },
   "homepage": "https://github.com/ionited/mesh#readme",
   "dependencies": {
-    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.56.0"
+    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.64.0"
   },
   "devDependencies": {
-    "@types/node": "^24.9.1",
-    "conventional-changelog-cli": "^3.0.0",
-    "typescript": "^5.9.3"
+    "@types/node": "^24.12.2",
+    "conventional-changelog-cli": "^5.0.0",
+    "typescript": "^6.0.2"
   },
   "files": [
     "dist/*"
