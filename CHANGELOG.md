@@ -1,3 +1,5 @@
+## [0.7.1](https://github.com/ionited/mesh/compare/0.7.0...0.7.1) (2026-04-16)
+
 # [0.7.0](https://github.com/ionited/mesh/compare/0.6.7...0.7.0) (2025-11-19)
 
 ### Features
