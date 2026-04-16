@@ -343,6 +343,6 @@ export class App {
   private parseParamKeys(pattern: string) {
     const params = pattern.match(/:[\w]+/g);
 
-    return params ? params : [];
+    return (params ?? []).map(p => p.slice(1));
   }
 }

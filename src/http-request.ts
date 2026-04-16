@@ -119,7 +119,7 @@ export class HttpRequest {
   params(): { [key: string]: string } {
     const data: any = {};
 
-    for (let i = 0; i < this.paramKeys.length; i++) data[this.paramKeys[i].slice(1)] = this.req.getParameter(i);
+    for (let i = 0; i < this.paramKeys.length; i++) data[this.paramKeys[i]] = this.req.getParameter(i);
 
     return data;
   }
