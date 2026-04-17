@@ -1,3 +1,9 @@
+## [0.7.3](https://github.com/ionited/mesh/compare/0.7.2...0.7.3) (2026-04-17)
+
+### Features
+
+* improve body parse ([52377f3](https://github.com/ionited/mesh/commit/52377f3c451f2f8ab093bf4d11ae835d55d67006))
+
 ## [0.7.2](https://github.com/ionited/mesh/compare/0.7.1...0.7.2) (2026-04-16)
 
 ### Features
