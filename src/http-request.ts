@@ -143,18 +143,12 @@ export class HttpRequest {
   }
 
   private async getBody(res: UHttpResponse): Promise<Buffer> {
-    let buffer: Buffer;
+    const chuncks: Buffer[] = [];
 
     return new Promise(resolve => res.onData((ab, isLast) => {
-      const chunk = Buffer.from(ab);
+      chuncks.push(Buffer.from(ab.slice(0)));
 
-      if (isLast) {
-        if (buffer) resolve(Buffer.concat([buffer, chunk]));
-        else resolve(chunk);
-      } else {
-        if (buffer) buffer = Buffer.concat([buffer, chunk]);
-        else buffer = Buffer.concat([chunk]);
-      }
+      if (isLast) resolve(Buffer.concat(chuncks));
     }));
   }
 }
