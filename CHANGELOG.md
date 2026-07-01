@@ -1,3 +1,14 @@
+# [0.8.0](https://github.com/ionited/mesh/compare/0.7.3...0.8.0) (2026-07-01)
+
+### Bug Fixes
+
+* check json correctly ([160cbd6](https://github.com/ionited/mesh/commit/160cbd6da125198f6e121c5fccaf906d556c8b18))
+
+### Features
+
+* if aborted early return ([97ecec1](https://github.com/ionited/mesh/commit/97ecec1dd85a80b6d7d1ea69174007ffda342cde))
+* improve params keys parse ([143fbe0](https://github.com/ionited/mesh/commit/143fbe0ce5d4b22cd9e4e4ad0063fd35ed877f11))
+
 ## [0.7.3](https://github.com/ionited/mesh/compare/0.7.2...0.7.3) (2026-04-17)
 
 ### Features
