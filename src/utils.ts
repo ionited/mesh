@@ -17,3 +17,9 @@ export const parseQuery = (query: string) => {
 
   return result;
 }
+
+export const parseParamKeys = (pattern: string) => {
+  const params = pattern.match(/:[\w]+/g);
+
+  return (params ?? []).map(p => p.slice(1));
+}

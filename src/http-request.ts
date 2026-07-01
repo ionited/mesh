@@ -1,5 +1,5 @@
 import { HttpRequest as UHttpRequest, HttpResponse as UHttpResponse, getParts } from 'uWebSockets.js';
-import { parseQuery } from './utils';
+import { parseParamKeys, parseQuery } from './utils';
 
 export interface UploadedFile {
   data: ArrayBuffer;
@@ -20,7 +20,7 @@ export class HttpRequest {
 
   private bodyData: Buffer | null = null;
   private contentType = '';
-  private paramKeys: string[];
+  private paramKeys: string[] | null = null;
   private req: UHttpRequest;
   private res: UHttpResponse;
 
@@ -117,6 +117,8 @@ export class HttpRequest {
    * Request path params
    */
   params(): { [key: string]: string } {
+    if (!this.paramKeys) this.paramKeys = parseParamKeys(this.route);
+
     const data: any = {};
 
     for (let i = 0; i < this.paramKeys.length; i++) data[this.paramKeys[i]] = this.req.getParameter(i);

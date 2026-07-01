@@ -300,9 +300,7 @@ export class App {
     pattern: string,
     handler: (req: HttpRequest, res: HttpResponse) => void | Promise<void>
   ) {
-    const
-      middlewares: any[] = [],
-      paramKeys = this.parseParamKeys(pattern);
+    const middlewares: any[] = [];
 
     for (let i = 0; i < this.middlewares.length; i++) {
       if (!this.middlewares[i].pattern || pattern.startsWith(this.middlewares[i].pattern as string)) middlewares.push(this.middlewares[i]);
@@ -310,7 +308,7 @@ export class App {
 
     this.app[method](pattern, async (ures, ureq) => {
       const
-        req = new HttpRequest(ureq, ures, pattern, paramKeys),
+        req = new HttpRequest(ureq, ures, pattern),
         res = new HttpResponse();
 
       let aborted = false;
@@ -338,11 +336,5 @@ export class App {
         else ures.end(res.body);
       }
     });
-  }
-
-  private parseParamKeys(pattern: string) {
-    const params = pattern.match(/:[\w]+/g);
-
-    return (params ?? []).map(p => p.slice(1));
   }
 }
