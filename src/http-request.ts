@@ -24,11 +24,10 @@ export class HttpRequest {
   private req: UHttpRequest;
   private res: UHttpResponse;
 
-  constructor(req: UHttpRequest, res: UHttpResponse, pattern: string, paramKeys: string[]) {
+  constructor(req: UHttpRequest, res: UHttpResponse, route: string) {
     this.req = req;
     this.res = res;
-    this.route = pattern;
-    this.paramKeys = paramKeys;
+    this.route = route;
   }
 
   /**
