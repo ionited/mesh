@@ -44,12 +44,14 @@ export class HttpRequest {
 
     if (!body?.length) return {};
 
-    if (this.contentType === 'application/json' || this.contentType === 'application/x-www-form-urlencoded') {
+    const isJson = this.contentType.startsWith('application/json');
+
+    if (isJson || this.contentType === 'application/x-www-form-urlencoded') {
       const bodyStr = body.toString();
       
       if (!bodyStr) return {};
 
-      return this.contentType === 'application/json' ? JSON.parse(bodyStr) : parseQuery(bodyStr);
+      return isJson ? JSON.parse(bodyStr) : parseQuery(bodyStr);
     } else if (this.contentType.startsWith('multipart/form-data')) {
       const data: any = {};
 
